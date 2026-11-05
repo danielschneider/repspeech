@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a19">
+  <title>Reported Speech | The Millionaire Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="wordmark" href="./" aria-label="The Grammar Vault home">
+        <span class="wordmark-icon" aria-hidden="true">G</span>
+        <span>THE GRAMMAR VAULT</span>
+      </a>
+      <div class="topbar-note"><span class="live-dot"></span> ENGLISH CHALLENGE <span class="topbar-divider">/</span> 01</div>
+    </header>
+
+    <section class="game-layout" aria-label="Reported speech quiz">
+      <div class="play-column">
+        <div class="eyebrow"><span class="eyebrow-line"></span> THE MILLIONAIRE QUIZ <span class="eyebrow-line"></span></div>
+        <h1>Reported <em>Speech</em></h1>
+        <p class="intro">One sentence. Four possibilities. How far will your grammar take you?</p>
+
+        <section class="question-panel" aria-labelledby="question-title">
+          <div class="question-meta">
+            <span id="question-counter">QUESTION 01 <span class="meta-muted">/ 05</span></span>
+            <span class="points-label"><span class="sparkle" aria-hidden="true">✳</span> <span id="question-prize">$100</span></span>
+          </div>
+          <div class="question-copy">
+            <p class="question-prompt">How would you report this?</p>
+            <h2 id="question-title" lang="en">Loading your first question…</h2>
+          </div>
+          <div class="answers" id="answers" role="group" aria-label="Choose the correct reported speech sentence"></div>
+          <div class="feedback" id="feedback" aria-live="polite" hidden>
+            <div class="feedback-heading" id="feedback-heading"></div>
+            <p id="explanation"></p>
+          </div>
+          <div class="question-footer">
+            <span id="game-status" aria-live="polite">Choose the best transformation.</span>
+            <button class="next-button" id="next-button" type="button" hidden>Next question <span aria-hidden="true">→</span></button>
+          </div>
+        </section>
+
+        <div class="lifelines" aria-label="Quiz tools">
+          <span class="lifelines-label">YOUR TOOLS</span>
+          <button class="tool-button" id="fifty-button" type="button" aria-label="Remove two incorrect answers" title="Remove two incorrect answers"><span class="tool-icon">50:50</span><span>Fifty-fifty</span></button>
+          <button class="tool-button" id="hint-button" type="button" aria-label="Show a grammar hint" title="Show a grammar hint"><span class="tool-icon hint-icon" aria-hidden="true">?</span><span>Grammar hint</span></button>
+        </div>
+      </div>
+
+      <aside class="ladder-panel" aria-label="Prize ladder">
+        <div class="ladder-heading"><span>THE CLIMB</span><span id="score-label">$0 WON</span></div>
+        <ol class="prize-ladder" id="prize-ladder"></ol>
+        <div class="ladder-bottom"><span class="ladder-mark" aria-hidden="true">✳</span><span>Every answer<br>takes you higher.</span></div>
+      </aside>
+    </section>
+
+    <footer class="page-footer"><span>GRAMMAR IS YOUR WAY UP.</span><span>REPORTED SPEECH <span class="footer-dot">·</span> ROUND ONE</span></footer>
+  </main>
+  <script src="quiz.js" defer></script>
+</body>
+</html>

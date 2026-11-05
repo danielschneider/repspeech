@@ -1,0 +1,62 @@
+[
+  {
+    "direct": "I am working on my essay now.",
+    "options": [
+      "She said that she was working on her essay then.",
+      "She said that I am working on my essay now.",
+      "She said that she is working on her essay now.",
+      "She said that she had worked on her essay then."
+    ],
+    "answerIndex": 0,
+    "hint": "Look at the present continuous verb and the word that points to the current moment.",
+    "explanation": "With a past reporting verb such as said, the present continuous usually moves back to the past continuous: am working becomes was working. The pronoun changes to match the speaker (I to she, my to her), and now usually changes to then."
+  },
+  {
+    "direct": "We have finished the project.",
+    "options": [
+      "They said that they finished the project.",
+      "They said that we had finished the project.",
+      "They said that they had finished the project.",
+      "They said that they have finished the project."
+    ],
+    "answerIndex": 2,
+    "hint": "The present perfect usually shifts one step further into the past after said.",
+    "explanation": "After the past reporting verb said, the present perfect have finished backshifts to the past perfect had finished. Because the speakers are reported as they, we changes to they."
+  },
+  {
+    "direct": "I will call you tomorrow.",
+    "options": [
+      "He said that I would call you tomorrow.",
+      "He said that he would call me the next day.",
+      "He said that he will call me the next day.",
+      "He said that he would call me tomorrow."
+    ],
+    "answerIndex": 1,
+    "hint": "Change will to its past form, and check both the listener pronoun and the time expression.",
+    "explanation": "Will usually backshifts to would after said. From the reporter's point of view, I becomes he and you becomes me. Tomorrow changes to the next day (or the following day) when the time reference has shifted."
+  },
+  {
+    "direct": "I saw your brother here yesterday.",
+    "options": [
+      "She said that she had seen my brother there the day before.",
+      "She said that she saw your brother here yesterday.",
+      "She said that she had saw my brother there the day before.",
+      "She said that I had seen her brother there the next day."
+    ],
+    "answerIndex": 0,
+    "hint": "The simple past often becomes past perfect. Also move the place and time words back with the speaker.",
+    "explanation": "Saw is the simple past, which commonly backshifts to had seen. The irregular past participle is seen, not saw. The pronoun your changes to my, here changes to there, and yesterday changes to the day before to fit the new reporting viewpoint."
+  },
+  {
+    "direct": "I can help you with this exercise.",
+    "options": [
+      "He said that he can help me with that exercise.",
+      "He said that I could help him with that exercise.",
+      "He said that he could help me with this exercise.",
+      "He said that he could help me with that exercise."
+    ],
+    "answerIndex": 3,
+    "hint": "Can shifts to could. The speaker, listener and the word this all depend on the new point of view.",
+    "explanation": "Can usually backshifts to could after said. I becomes he, you becomes me, and this often changes to that when the original situation is no longer present or nearby."
+  }
+]
