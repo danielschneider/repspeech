@@ -1,4 +1,4 @@
-const prizeValues = [100, 200, 300, 500, 1000];
+const prizeValues = [100, 200, 300, 500, 1000, 2000, 4000, 8000, 16000, 32000, 64000, 125000, 250000, 500000, 1000000];
 const answerLetters = ["A", "B", "C", "D"];
 
 const state = {
@@ -159,7 +159,8 @@ function advance() {
 }
 
 function startGame(questions) {
-  if (questions) state.questions = shuffle(questions);
+  if (questions) state.questionBank = questions;
+  state.questions = shuffle(state.questionBank).slice(0, prizeValues.length);
   state.round = 0;
   state.score = 0;
   state.fiftyUsed = false;
@@ -178,8 +179,8 @@ fetch("database.json")
     return response.json();
   })
   .then((questions) => {
-    if (!Array.isArray(questions) || questions.length !== prizeValues.length) {
-      throw new Error("The quiz needs exactly five questions.");
+    if (!Array.isArray(questions) || questions.length !== 500) {
+      throw new Error("The quiz needs exactly 500 questions.");
     }
     startGame(questions);
   })
