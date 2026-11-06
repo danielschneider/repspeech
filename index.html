@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <main class="game-shell">
@@ -21,6 +21,10 @@
     </header>
 
     <section class="game-layout" aria-label="Reported speech quiz">
+      <aside class="ladder-panel" aria-label="Prize ladder">
+        <div class="ladder-heading"><span>THE CLIMB</span><span id="score-label">$0 WON</span></div>
+        <ol class="prize-ladder" id="prize-ladder"></ol>
+      </aside>
       <div class="play-column">
         <div class="eyebrow"><span class="eyebrow-line"></span> THE MILLIONAIRE QUIZ <span class="eyebrow-line"></span></div>
         <h1>Reported <em>Speech</em></h1>
@@ -56,15 +60,10 @@
         </div>
       </div>
 
-      <aside class="ladder-panel" aria-label="Prize ladder">
-        <div class="ladder-heading"><span>THE CLIMB</span><span id="score-label">$0 WON</span></div>
-        <ol class="prize-ladder" id="prize-ladder"></ol>
-        <div class="ladder-bottom"><span class="ladder-mark" aria-hidden="true">✳</span><span>Every answer<br>takes you higher.</span></div>
-      </aside>
     </section>
 
     <footer class="page-footer"><span>FINAL ANSWER?</span><span>REPORTED SPEECH <span class="footer-dot">·</span> ROUND ONE</span></footer>
   </main>
-  <script src="quiz.js" defer></script>
+  <script src="quiz.js?v=3" defer></script>
 </body>
 </html>
