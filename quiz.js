@@ -226,8 +226,8 @@ fetch("database.json")
     return response.json();
   })
   .then((questions) => {
-    if (!Array.isArray(questions) || questions.length !== 500) {
-      throw new Error("The quiz needs exactly 500 questions.");
+    if (!Array.isArray(questions) || questions.length < prizeValues.length) {
+      throw new Error(`The quiz needs at least ${prizeValues.length} questions.`);
     }
     startGame(questions);
   })
