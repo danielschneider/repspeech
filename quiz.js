@@ -8,7 +8,6 @@ const state = {
   score: 0,
   correctCount: 0,
   selectedIndex: null,
-  locked: false,
   answered: false,
   finished: false,
   showingResult: false,
@@ -25,8 +24,7 @@ const elements = {
   feedbackHeading: document.querySelector("#feedback-heading"),
   explanation: document.querySelector("#explanation"),
   gameStatus: document.querySelector("#game-status"),
-  lockButton: document.querySelector("#lock-button"),
-  acceptButton: document.querySelector("#accept-button"),
+  confirmButton: document.querySelector("#confirm-button"),
   nextButton: document.querySelector("#next-button"),
   fiftyButton: document.querySelector("#fifty-button"),
   hintButton: document.querySelector("#hint-button"),
@@ -47,8 +45,14 @@ function shuffle(items) {
   return shuffled;
 }
 
+function shuffleOptions(question) {
+  const correctText = question.options[question.answerIndex];
+  const options = shuffle(question.options);
+  return { ...question, options, answerIndex: options.indexOf(correctText) };
+}
+
 function canUseTools() {
-  return state.questions.length > 0 && !state.finished && !state.locked && !state.answered;
+  return state.questions.length > 0 && !state.finished && !state.answered;
 }
 
 function renderLadder() {
@@ -69,16 +73,9 @@ function renderTools() {
   elements.hintButton.disabled = state.hintUsed || !canUseTools();
 }
 
-function setAnswerButtonsDisabled() {
-  elements.answers.querySelectorAll(".answer-button").forEach((button) => {
-    button.disabled = true;
-  });
-}
-
 function renderQuestion() {
   const question = state.questions[state.round];
   state.selectedIndex = null;
-  state.locked = false;
   state.answered = false;
   elements.questionCounter.innerHTML = `QUESTION ${String(state.round + 1).padStart(2, "0")} <span class="meta-muted">/ ${String(state.questions.length).padStart(2, "0")}</span>`;
   elements.questionPrize.textContent = formatPrize(prizeValues[state.round]);
@@ -87,10 +84,8 @@ function renderQuestion() {
   elements.feedback.hidden = true;
   elements.feedback.classList.remove("is-wrong");
   elements.nextButton.hidden = true;
-  elements.lockButton.hidden = true;
-  elements.lockButton.disabled = true;
-  elements.acceptButton.hidden = true;
-  elements.gameStatus.textContent = "Select an answer, then lock it in.";
+  elements.confirmButton.hidden = true;
+  elements.gameStatus.textContent = "Select an answer.";
 
   question.options.forEach((option, index) => {
     const button = document.createElement("button");
@@ -113,30 +108,21 @@ function selectAnswer(index) {
   elements.answers.querySelectorAll(".answer-button").forEach((button, buttonIndex) => {
     button.classList.toggle("is-selected", buttonIndex === index);
   });
-  elements.lockButton.hidden = false;
-  elements.lockButton.disabled = false;
-  elements.gameStatus.textContent = `Answer ${answerLetters[index]} selected. Lock it in to continue.`;
+  elements.confirmButton.hidden = false;
+  elements.gameStatus.textContent = `Answer ${answerLetters[index]} selected. Confirm to continue.`;
   renderTools();
 }
 
-function lockAnswer() {
+function confirmAnswer() {
   if (state.selectedIndex === null || !canUseTools()) return;
-  state.locked = true;
-  setAnswerButtonsDisabled();
-  elements.lockButton.hidden = true;
-  elements.acceptButton.hidden = false;
-  elements.gameStatus.textContent = "Answer locked. Accept it to see the result.";
-  renderTools();
-}
-
-function acceptAnswer() {
-  if (!state.locked || state.answered) return;
   state.answered = true;
   const question = state.questions[state.round];
   const correct = state.selectedIndex === question.answerIndex;
   const buttons = [...elements.answers.querySelectorAll(".answer-button")];
 
   buttons.forEach((button, index) => {
+    button.disabled = true;
+    button.classList.remove("is-selected");
     if (index === question.answerIndex) button.classList.add("is-correct");
     if (index === state.selectedIndex && !correct) button.classList.add("is-wrong");
   });
@@ -147,7 +133,7 @@ function acceptAnswer() {
   }
   state.finished = !correct || state.round === state.questions.length - 1;
 
-  elements.acceptButton.hidden = true;
+  elements.confirmButton.hidden = true;
   elements.feedback.hidden = false;
   elements.feedback.classList.toggle("is-wrong", !correct);
   elements.feedbackHeading.textContent = correct ? "Correct. You’re moving up." : "Not quite. Here’s the rule.";
@@ -187,8 +173,7 @@ function showFinalResult() {
   elements.questionPrize.textContent = formatPrize(state.score);
   elements.questionTitle.textContent = wonMillion ? "You won the million!" : "Game over.";
   elements.answers.replaceChildren();
-  elements.lockButton.hidden = true;
-  elements.acceptButton.hidden = true;
+  elements.confirmButton.hidden = true;
   elements.feedback.hidden = false;
   elements.feedback.classList.remove("is-wrong");
   elements.feedbackHeading.textContent = `${state.correctCount} of ${state.questions.length} correct`;
@@ -213,12 +198,6 @@ function handleNext() {
   renderQuestion();
 }
 
-function shuffleOptions(question) {
-  const correctText = question.options[question.answerIndex];
-  const options = shuffle(question.options);
-  return { ...question, options, answerIndex: options.indexOf(correctText) };
-}
-
 function startGame(questions) {
   if (questions) state.questionBank = questions;
   state.questions = shuffle(state.questionBank).slice(0, prizeValues.length).map(shuffleOptions);
@@ -234,8 +213,7 @@ function startGame(questions) {
 
 elements.fiftyButton.addEventListener("click", useFiftyFifty);
 elements.hintButton.addEventListener("click", useHint);
-elements.lockButton.addEventListener("click", lockAnswer);
-elements.acceptButton.addEventListener("click", acceptAnswer);
+elements.confirmButton.addEventListener("click", confirmAnswer);
 elements.nextButton.addEventListener("click", handleNext);
 
 fetch("database.json")
