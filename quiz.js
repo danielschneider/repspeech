@@ -32,6 +32,10 @@ const elements = {
   scoreLabel: document.querySelector("#score-label"),
 };
 
+function clearChildren(element) {
+  element.innerHTML = "";
+}
+
 function formatPrize(value) {
   return `$${value.toLocaleString("en-US")}`;
 }
@@ -56,7 +60,7 @@ function canUseTools() {
 }
 
 function renderLadder() {
-  elements.prizeLadder.replaceChildren();
+  clearChildren(elements.prizeLadder);
   prizeValues.forEach((value, index) => {
     const step = document.createElement("li");
     step.className = "prize-step";
@@ -80,7 +84,7 @@ function renderQuestion() {
   elements.questionCounter.innerHTML = `QUESTION ${String(state.round + 1).padStart(2, "0")} <span class="meta-muted">/ ${String(state.questions.length).padStart(2, "0")}</span>`;
   elements.questionPrize.textContent = formatPrize(prizeValues[state.round]);
   elements.questionTitle.textContent = `“${question.direct}”`;
-  elements.answers.replaceChildren();
+  clearChildren(elements.answers);
   elements.feedback.hidden = true;
   elements.feedback.classList.remove("is-wrong");
   elements.nextButton.hidden = true;
@@ -172,7 +176,7 @@ function showFinalResult() {
   elements.questionCounter.textContent = "ROUND COMPLETE";
   elements.questionPrize.textContent = formatPrize(state.score);
   elements.questionTitle.textContent = wonMillion ? "You won the million!" : "Game over.";
-  elements.answers.replaceChildren();
+  clearChildren(elements.answers);
   elements.confirmButton.hidden = true;
   elements.feedback.hidden = false;
   elements.feedback.classList.remove("is-wrong");
@@ -231,6 +235,6 @@ fetch("database.json")
     elements.questionTitle.textContent = "The quiz could not start.";
     elements.gameStatus.textContent = "Run this folder through a static web server to load database.json.";
     elements.gameStatus.classList.add("error-message");
-    elements.answers.replaceChildren();
+    clearChildren(elements.answers);
     console.error(error);
   });
