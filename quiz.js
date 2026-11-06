@@ -48,7 +48,7 @@ function shuffle(items) {
 }
 
 function canUseTools() {
-  return !state.finished && !state.locked && !state.answered;
+  return state.questions.length > 0 && !state.finished && !state.locked && !state.answered;
 }
 
 function renderLadder() {
@@ -213,9 +213,15 @@ function handleNext() {
   renderQuestion();
 }
 
+function shuffleOptions(question) {
+  const correctText = question.options[question.answerIndex];
+  const options = shuffle(question.options);
+  return { ...question, options, answerIndex: options.indexOf(correctText) };
+}
+
 function startGame(questions) {
   if (questions) state.questionBank = questions;
-  state.questions = shuffle(state.questionBank).slice(0, prizeValues.length);
+  state.questions = shuffle(state.questionBank).slice(0, prizeValues.length).map(shuffleOptions);
   state.round = 0;
   state.score = 0;
   state.correctCount = 0;
