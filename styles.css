@@ -1,14 +1,14 @@
 :root {
   color-scheme: dark;
-  --ink: #070e20;
-  --panel: #101d3c;
-  --panel-raised: #172950;
-  --line: #39507a;
-  --cream: #f5f2e8;
-  --muted: #a7b3cd;
-  --gold: #f0c66e;
-  --green: #80d5c2;
-  --red: #f18b76;
+  --ink: #2a0a3d;
+  --panel: #3d1458;
+  --panel-raised: #4f1d70;
+  --line: #9b4fc4;
+  --cream: #fff7e0;
+  --muted: #e0b8f0;
+  --gold: #ff7a1a;
+  --green: #3ee8a0;
+  --red: #ff3b6b;
   --sans: "DM Sans", sans-serif;
   --serif: "Playfair Display", Georgia, serif;
   --mono: "DM Mono", monospace;
